@@ -1,0 +1,82 @@
+{
+  "name": "explorer-with-commits",
+  "displayName": "Explorer with Commits",
+  "description": "Display latest commit messages for files and directories in the VSCode Explorer",
+  "version": "0.0.1",
+  "publisher": "senese",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/senese/explorer-with-commits"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "extensionDependencies": [
+    "vscode.git"
+  ],
+  "activationEvents": [
+    "onView:workbench.explorer.fileView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "explorerWithCommits.refresh",
+        "title": "Explorer with Commits: Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "configuration": {
+      "title": "Explorer with Commits",
+      "properties": {
+        "explorerWithCommits.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable commit message decorations in Explorer"
+        },
+        "explorerWithCommits.showAuthor": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include commit author in decoration tooltip"
+        },
+        "explorerWithCommits.showDate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include commit date in decoration tooltip"
+        },
+        "explorerWithCommits.cacheDuration": {
+          "type": "number",
+          "default": 300000,
+          "description": "Cache duration in milliseconds (default: 5 minutes)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "xvfb-run -a node --no-deprecation ./out/src/test/runTest.js",
+    "test:no-xvfb": "node --no-deprecation ./out/src/test/runTest.js",
+    "test:verbose": "xvfb-run -a node ./out/src/test/runTest.js",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "glob": "^10.5.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3"
+  }
+}
